@@ -23,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <title>{title}</title>
         <meta name="description" content={description} />
       </Head>
