@@ -42,7 +42,7 @@ export default function ResultPage() {
         <h2 className="font-semibold text-neutral-700 text-lg">
           Models for {makeId} ({year})
         </h2>
-        <table className="min-w-full bg-white rounded-md shadow">
+        <table className="w-full bg-white rounded-md shadow max-w-[96%]">
           <thead>
             <tr>
               <th className="py-2 px-4 border-b text-left">Model ID</th>
