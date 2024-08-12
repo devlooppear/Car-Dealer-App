@@ -4,18 +4,20 @@ const Navbar = () => {
   return (
     <div>
       <nav className="flex justify-between bg-neutral-100">
-        <div className="px-2 py-1 font-semibold text-orange-500 border-2 border-neutral-400 my-1 mx-2 rounded-md shadow-md">
-          <h2>Car Dealer App</h2>
+        <div className="max-w-[50px] w-full">
+          <img
+          className="mx-2 my-1 rounded-md border-2 border-neutral-400 shadow-md"
+          src="/apple-touch-icon.png" alt="logo-img" />
         </div>
-        <ul className="flex justify-center align-middle items-center gap-3 mx-2">
-          <li className="mx-1 p-1 bg-neutral-100 border-2 border-neutral-300 shadow-md rounded-md text-neutral-600 hover:font-semibold hover:bg-neutral-50">
+        <ul className="flex justify-center align-middle items-center gap-3 mr-3 ml-1">
+          <li className="p-1 bg-neutral-50 border-2 border-neutral-400 shadow-md rounded-md text-orange-600 font-semibold hover:font-bold hover:bg-orange-50">
             <Link href="/" className="no-underline">
               Home
             </Link>
           </li>
-          <li className="mx-1 p-1 bg-neutral-100 border-2 border-neutral-300 shadow-md rounded-md text-neutral-600 hover:font-semibold hover:bg-neutral-50">
+          <li className="p-1 bg-neutral-50 border-2 border-neutral-400 shadow-md rounded-md text-orange-600 font-semibold hover:font-bold hover:bg-orange-50">
             <Link href="/about" className="no-underline">
-              About
+              Vehicles
             </Link>
           </li>
         </ul>
