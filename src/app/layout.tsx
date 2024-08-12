@@ -8,7 +8,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Car Dealer App - Find Your Perfect Vehicle",
-  description: "Explore and compare a wide range of vehicles. Find your ideal car with ease using our intuitive car dealer app.",
+  description:
+    "Explore and compare a wide range of vehicles. Find your ideal car with ease using our intuitive car dealer app.",
 };
 
 export default function RootLayout({
@@ -22,7 +23,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
-        <link rel="shortcut icon" href="/assets/logo/favicon.ico" type="image/x-icon" />
         <title>{title}</title>
         <meta name="description" content={description} />
       </Head>
