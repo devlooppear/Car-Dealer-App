@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import { VehicleModelsResponse, VehicleTypesResponse } from "./types";
 
 const apiService: AxiosInstance = axios.create({
-  baseURL: "https://vpic.nhtsa.dot.gov/api",
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
