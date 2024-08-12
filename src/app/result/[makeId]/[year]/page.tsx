@@ -16,7 +16,6 @@ export default function ResultPage() {
 
     const fetchModels = async () => {
       try {
-        console.log("makeId:", makeId);
         const data: VehicleModelsResponse = await getVehicleModels(
           makeId,
           year

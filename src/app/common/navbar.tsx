@@ -16,7 +16,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="p-1 bg-neutral-50 border-2 border-neutral-400 shadow-md rounded-md text-orange-600 font-semibold hover:font-bold hover:bg-orange-50">
-            <Link href="/about" className="no-underline">
+            <Link href="/vehicles" className="no-underline">
               Vehicles
             </Link>
           </li>
