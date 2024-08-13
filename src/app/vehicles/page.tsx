@@ -148,7 +148,7 @@ export default function VehiclesPage() {
               disabled={!isButtonEnabled}
               className="p-1 bg-neutral-50 border-2 border-neutral-400 shadow-md rounded-md text-orange-600 font-semibold hover:font-bold hover:bg-orange-50 w-full max-w-[250px] mx-auto"
             >
-              Check Results
+              Next
             </button>
         </div>
       </div>
