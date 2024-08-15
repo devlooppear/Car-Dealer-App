@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import { getVehicleModels } from "@/app/api/apiService";
-import { VehicleModel, VehicleModelsResponse } from "@/app/api/types";
+import React, { Suspense, useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
+import { getVehicleModels } from '@/app/api/apiService';
+import { VehicleModel, VehicleModelsResponse } from '@/app/api/types';
+import Loader from '@/app/common/loader'; 
 
-export default function ResultPage() {
+const ResultContent: React.FC = () => {
   const { makeId, year } = useParams<{ makeId: string; year: string }>();
   const [models, setModels] = useState<VehicleModel[]>([]);
   const [loading, setLoading] = useState(true);
@@ -16,13 +17,10 @@ export default function ResultPage() {
 
     const fetchModels = async () => {
       try {
-        const data: VehicleModelsResponse = await getVehicleModels(
-          makeId,
-          year
-        );
+        const data: VehicleModelsResponse = await getVehicleModels(makeId, year);
         setModels(data.Results);
       } catch (error) {
-        setError("Erro ao buscar modelos de veículos");
+        setError('Erro ao buscar modelos de veículos');
         console.error(error);
       } finally {
         setLoading(false);
@@ -32,7 +30,7 @@ export default function ResultPage() {
     fetchModels();
   }, [makeId, year]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loader />;
   if (error) return <p>{error}</p>;
 
   return (
@@ -62,4 +60,14 @@ export default function ResultPage() {
       </div>
     </div>
   );
-}
+};
+
+const ResultPage: React.FC = () => {
+  return (
+    <Suspense fallback={<Loader />}>
+      <ResultContent />
+    </Suspense>
+  );
+};
+
+export default ResultPage;

@@ -1,15 +1,18 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getVehicleTypes } from "../api/apiService";
 import { VehicleType } from "../api/types";
+import Loader from "../common/loader";
 
-export default function VehiclesPage() {
+const VehiclesContent: React.FC = () => {
   const router = useRouter();
-  const dropdownRef = useRef<HTMLDivElement>(null); // Ref para o dropdown
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [vehicleTypes, setVehicleTypes] = useState<VehicleType[]>([]);
-  const [filteredVehicleTypes, setFilteredVehicleTypes] = useState<VehicleType[]>([]);
+  const [filteredVehicleTypes, setFilteredVehicleTypes] = useState<
+    VehicleType[]
+  >([]);
   const [selectedType, setSelectedType] = useState<number | undefined>(
     undefined
   );
@@ -18,7 +21,7 @@ export default function VehiclesPage() {
   );
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchVehicleTypes = async () => {
@@ -48,7 +51,10 @@ export default function VehiclesPage() {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     };
@@ -67,7 +73,7 @@ export default function VehiclesPage() {
 
   const handleTypeClick = (typeId: number) => {
     setSelectedType(typeId);
-    setIsDropdownOpen(false); 
+    setIsDropdownOpen(false);
   };
 
   const handleYearClick = (year: number) => {
@@ -82,15 +88,20 @@ export default function VehiclesPage() {
             Filter Vehicles
           </h2>
           <div className="w-full flex flex-col gap-5">
-            <div className="text-neutral-700 font-semibold mb-1">Vehicle Type</div>
+            <div className="text-neutral-700 font-semibold mb-1">
+              Vehicle Type
+            </div>
             <div className="relative" ref={dropdownRef}>
               <div
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className={`cursor-pointer p-2 border rounded-md ${
-                  selectedType ? "bg-orange-200 border-orange-400" : "bg-neutral-50 border-neutral-300"
+                  selectedType
+                    ? "bg-orange-200 border-orange-400"
+                    : "bg-neutral-50 border-neutral-300"
                 }`}
               >
-                {vehicleTypes.find((type) => type.MakeId === selectedType)?.MakeName || "Select Vehicle Type"}
+                {vehicleTypes.find((type) => type.MakeId === selectedType)
+                  ?.MakeName || "Select Vehicle Type"}
               </div>
               {isDropdownOpen && (
                 <div className="absolute top-full left-0 mt-1 w-full max-h-48 overflow-y-auto bg-neutral-50 border border-neutral-300 rounded-md shadow-lg z-10">
@@ -143,15 +154,25 @@ export default function VehiclesPage() {
               ))}
             </div>
           </div>
-            <button
-              onClick={handleNextClick}
-              disabled={!isButtonEnabled}
-              className="p-1 bg-neutral-50 border-2 border-neutral-400 shadow-md rounded-md text-orange-600 font-semibold hover:font-bold hover:bg-orange-50 w-full max-w-[250px] mx-auto"
-            >
-              Next
-            </button>
+          <button
+            onClick={handleNextClick}
+            disabled={!isButtonEnabled}
+            className="p-1 bg-neutral-50 border-2 border-neutral-400 shadow-md rounded-md text-orange-600 font-semibold hover:font-bold hover:bg-orange-50 w-full max-w-[250px] mx-auto"
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>
   );
-}
+};
+
+const VehiclesPage: React.FC = () => {
+  return (
+    <Suspense fallback={<Loader />}>
+      <VehiclesContent />
+    </Suspense>
+  );
+};
+
+export default VehiclesPage;
